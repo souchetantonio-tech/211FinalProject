@@ -78,5 +78,33 @@ American Community Survey (ACS) 5-Year demographic data from the United States C
 Global Historical Climatology Network Daily (GHCN-Daily) precipitation data from the National Oceanic and Atmospheric Administration website: https://www.ncdc.noaa.gov/cdo-web/
 . This dataset represents a sample of the total Midwest weather station data, using a subset of selected stations to make the analysis manageable. The spatial coverage includes selected weather stations across Illinois and nearby Midwest locations, including Chicago-area airports (O’Hare, Midway, DuPage, Aurora, Palwaukee, Waukegan), Peoria, Rockford, and Springfield, as well as a small number of additional stations in Ohio, Missouri, and Vermont. The temporal coverage spans 1990–2024. The main variables include daily precipitation (PRCP), multiday precipitation totals (MDPR), and the number of days included in multiday precipitation events (DAPR), along with station name and geographic location metadata. The file format is CSV (.csv).
 
+# Part 5. Preliminary Method Plan
 
+## Research Question  
+Have extreme precipitation events increased in the Midwest over the past 30 years?
 
+## Data Cleaning  
+Data from the NOAA GHCN-Daily dataset will be cleaned by removing missing or invalid values. The dataset will be filtered to include selected stations across the Midwest and the time period 1990–2024.
+
+## Variables  
+- Response: daily precipitation (PRCP), annual maximum precipitation, number of extreme precipitation days  
+- Explanatory: year  
+- Grouping: weather station  
+
+## Visualizations  
+- Line graphs of annual maximum precipitation over time  
+- Line graphs of extreme precipitation days per year  
+- Histograms or boxplots comparing precipitation across years
+
+## Methods  
+- Linear regression to assess rain trends over time  
+- Threshold analysis to define extreme events (e.g., precipitation above 25 mm)  
+
+# Note on AI 
+AI was used to brainstorm the research questions and to generate potential data sources.
+
+Prompt 1: Generate 10 specific and testable research questions related to environmental science and climate data analysis.
+
+Prompt 2: Suggest 5 real, publicly available datasets for a data science project on (my topics). 
+
+The AI output helped me find the relevant data faster and develop research questions suited to the class and the Midwest. 
