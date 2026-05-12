@@ -72,4 +72,8 @@ Landsat Collection 2 Level-2 scene metadata (Landsat 8/9) from the USGS EarthExp
 Landsat Collection 2 Level-2 QA Pixel band (Landsat 8) from the U.S. Geological Survey EarthExplorer website: https://earthexplorer.usgs.gov/
 . The spatial coverage includes a Landsat scene overlapping Chicago and the surrounding Midwest region, and the temporal coverage corresponds to a single acquisition date on August 31, 2023. The main variables include pixel-level quality assessment values indicating cloud cover, cloud shadows, snow, water, and other surface conditions used for masking and preprocessing satellite imagery. The file format is GeoTIFF (.tif).
 
+American Community Survey (ACS) 5-Year demographic data from the United States Census Bureau website: https://data.census.gov/
+. The spatial coverage includes Chicago wards, and the temporal coverage corresponds to the most recent 5-year ACS estimates (e.g., 2018–2022). The main variables include median household income, total population, population density, and other demographic indicators aggregated at the ward level. The file format is CSV (.csv).
+
+
 
