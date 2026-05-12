@@ -63,3 +63,11 @@ Extreme precipitation can cause flooding, infrastructure damage, agricultural im
 - Statistical summaries of annual extremes
 - Geographic visualization of precipitation trends
 - Histograms or boxplots comparing precipitation distributions over time
+
+### Data Sources in 02_RawData
+Landsat Collection 2 Level-2 scene metadata (Landsat 8/9) from the USGS EarthExplorer website: https://earthexplorer.usgs.gov/. The spatial coverage includes Landsat scenes overlapping Chicago and the broader Midwest region, and the temporal coverage spans summer 2023 (June–August). The main variables include acquisition date, satellite (Landsat 8 or 9), path/row, cloud cover percentage, and scene identifiers. The file format is CSV (.csv).
+
+Landsat Collection 2 Level-2 QA Pixel band (Landsat 8) from the U.S. Geological Survey EarthExplorer website: https://earthexplorer.usgs.gov/
+. The spatial coverage includes a Landsat scene overlapping Chicago and the surrounding Midwest region, and the temporal coverage corresponds to a single acquisition date on August 31, 2023. The main variables include pixel-level quality assessment values indicating cloud cover, cloud shadows, snow, water, and other surface conditions used for masking and preprocessing satellite imagery. The file format is GeoTIFF (.tif).
+
+
