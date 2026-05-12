@@ -75,5 +75,8 @@ Landsat Collection 2 Level-2 QA Pixel band (Landsat 8) from the U.S. Geological 
 American Community Survey (ACS) 5-Year demographic data from the United States Census Bureau website: https://data.census.gov/
 . The spatial coverage includes Chicago wards, and the temporal coverage corresponds to the most recent 5-year ACS estimates (e.g., 2018–2022). The main variables include median household income, total population, population density, and other demographic indicators aggregated at the ward level. The file format is CSV (.csv).
 
+Global Historical Climatology Network Daily (GHCN-Daily) precipitation data from the National Oceanic and Atmospheric Administration website: https://www.ncdc.noaa.gov/cdo-web/
+. This dataset represents a sample of the total Midwest weather station data, using a subset of selected stations to make the analysis manageable. The spatial coverage includes selected weather stations across Illinois and nearby Midwest locations, including Chicago-area airports (O’Hare, Midway, DuPage, Aurora, Palwaukee, Waukegan), Peoria, Rockford, and Springfield, as well as a small number of additional stations in Ohio, Missouri, and Vermont. The temporal coverage spans 1990–2024. The main variables include daily precipitation (PRCP), multiday precipitation totals (MDPR), and the number of days included in multiday precipitation events (DAPR), along with station name and geographic location metadata. The file format is CSV (.csv).
+
 
 
