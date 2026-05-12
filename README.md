@@ -50,8 +50,6 @@ Extreme precipitation can cause flooding, infrastructure damage, agricultural im
 - Year or time
 - Geographic region or station location
 
-# Part 4
-
 ### Data Sources
 - NOAA Global Historical Climatology Network (GHCN)
 - NOAA National Centers for Environmental Information (NCEI)
@@ -65,6 +63,8 @@ Extreme precipitation can cause flooding, infrastructure damage, agricultural im
 - Statistical summaries of annual extremes
 - Geographic visualization of precipitation trends
 - Histograms or boxplots comparing precipitation distributions over time
+
+# Part 4
 
 ### Data Sources in 02_RawData
 Landsat Collection 2 Level-2 scene metadata (Landsat 8/9) from the USGS EarthExplorer website: https://earthexplorer.usgs.gov/. The spatial coverage includes Landsat scenes overlapping Chicago and the broader Midwest region, and the temporal coverage spans summer 2023 (June–August). The main variables include acquisition date, satellite (Landsat 8 or 9), path/row, cloud cover percentage, and scene identifiers. The file format is CSV (.csv).
