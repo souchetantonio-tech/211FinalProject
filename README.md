@@ -1,110 +1,88 @@
-# 211FinalProject
+# Have extreme precipitation events increased across the U.S. Midwest?
 
-# Part 3
+**A data-analysis project using NOAA GHCN-Daily station records (2009–2024).**
 
-## Question 1
-### How does summer land surface temperature vary across Chicago neighborhoods, and is higher heat exposure associated with differences in income, tree cover, or population density?
+## Research question
 
-This project will track patterns of urban heat across Chicago neighborhoods during the summer. The goal is to determine whether lower income neighborhoods (often those with lower tree coverage or higher population density) experience higher surface temperatures. Urban heat exposure is an important environmental and public health issue because extreme heat can increase heat-related illness, worsen air quality, and affect vulnerable communities. Understanding spatial differences in heat exposure can help identify environmental inequalities and support urban planning strategies like increasing tree coverage or green infrastructure. This topic is scientifically meaningful because it combines geospatial analysis, remote sensing, environmental statistics, and urban environmental science.
+Has the frequency or intensity of **extreme precipitation events** changed
+across the U.S. Midwest over the available observational record? The project
+was originally framed around a 30-year window (1990–2024); however, the daily
+station records obtained from NOAA for the selected stations only begin in
+**May 2009**, so the analysis is honestly scoped to the **2009–2024** download
+(with formal trend tests run on the 14 complete calendar years, 2010–2023).
 
-### Response Variable
-- Summer land surface temperature (LST)
+## Short summary
 
-### Explanatory Variables
-- Median household income
-- Tree canopy coverage or NDVI vegetation index
-- Population density
-- Distance from downtown or lakefront
+Daily precipitation from **10 core Midwest weather stations** (Illinois, Ohio,
+Missouri) is aggregated into annual extreme-precipitation indices (annual
+maximum 1-day rainfall, and counts of days ≥ 0.5 / 1 / 2 inches) and a monthly
+regional series. Seven complementary techniques are applied. At the
+regional-annual scale **no statistically significant monotonic trend** is
+found in any extreme index — the 14-year record is simply too short to resolve
+one. However, higher-powered tests that pool the station-level data detect a
+**modest but statistically significant increase** in the frequency of
+heavy-rain days (≥ 1 in) in the later half of the record (2.12 % → 2.41 % of
+days; χ² p = 0.029), while the most intense metrics (annual maximum, days ≥ 2
+in) show no change. The evidence is therefore *suggestive of*, but far from
+*conclusive proof of*, an increase in Midwest extreme precipitation.
 
-### Data Sources
-- Landsat 8 or Landsat 9 satellite imagery for land surface temperature
-- MODIS land surface temperature products
-- U.S. Census American Community Survey (ACS) demographic data
-- Chicago Data Portal neighborhood boundary shapefiles
-- Chicago tree canopy or vegetation datasets
-- NOAA climate datasets (optional for comparison)
+## Data sources
 
-### Types of Analysis
-- Geospatial analysis using GIS or Python geospatial libraries
-- Correlation analysis
-- Multiple linear regression
-- Heat maps and choropleth maps
-- Scatterplots comparing LST with income, tree cover, and population density
+* **NOAA GHCN-Daily** daily precipitation (`02_RawData/4311294.csv`), obtained
+  from NOAA Climate Data Online, https://www.ncdc.noaa.gov/cdo-web/ .
+* Spatial coverage: 13 stations in IL, OH, MO (+ 1 VT station used only for
+  screening). Temporal coverage: 2009-05-01 to 2024-05-31. Main variable:
+  daily precipitation `PRCP` (inches).
 
----
+Full citations are in `07_References/references.md`.
 
-## Question 2
-### Have extreme precipitation events increased in the Midwest over the past 30 years?
+## Repository structure
 
-This project will investigate whether the frequency or intensity of extreme precipitation events have changed across the Midwest region of the United States between 1990 and 2024. The analysis will focus on identifying long-term trends in heavy rainfall events and determining whether these have become more common over time.
+```
+README.md                  – this overview
+01_Code/                   – analysis pipeline (numbered, run in order)
+  ├─ 01_clean_data.py       raw GHCN CSV → processed datasets
+  ├─ 02_analyze_data.py     all statistical tests → 04_Results + 06_Tables
+  ├─ 03_make_figures.py     all figures → 05_Figures
+  └─ stats_utils.py         self-contained statistics library (no SciPy needed)
+02_RawData/                – raw NOAA download (unmodified) + data notes
+03_ProcessedData/          – cleaned station-year, monthly, and metadata CSVs
+04_Results/                – analysis_results.md (human-readable findings)
+05_Figures/                – publication figures (PNG)
+06_Tables/                 – summary tables (CSV)
+07_References/             – data, literature, software, and method citations
+08_Final_Report/           – Final_Report.md (the full report)
+09_Other_Materials/        – supporting notes
+```
 
-Extreme precipitation can cause flooding, infrastructure damage, agricultural impacts, and public safety risks. Climate studies suggest that warming temperatures may increase atmospheric moisture and contribute to heavier rainfall events. Investigating precipitation trends in the Midwest is scientifically meaningful because the region is highly sensitive to flooding and agricultural disruption. This project also connects to broader climate change research.
+## Analysis workflow
 
-### Response Variables
-- Daily precipitation totals
-- Annual maximum precipitation
-- Number of heavy precipitation days per year
-- Frequency of rainfall above some threshold
+1. **Clean** (`01_clean_data.py`) — parse the raw GHCN file, label states,
+   flag the 10-station Midwest "core" network, drop a data-quality error,
+   and write three processed CSVs.
+2. **Analyze** (`02_analyze_data.py`) — build the regional annual and monthly
+   series and run: (1) OLS linear-regression trend, (2) Mann-Kendall +
+   Theil-Sen, (3) Pearson/Spearman correlation, (4) Welch two-sample t-test,
+   (5) χ² test of independence, (6) seasonal decomposition + smoothing,
+   (7) autocorrelation analysis, plus a one-way ANOVA of spatial variation.
+3. **Visualize** (`03_make_figures.py`) — produce the seven figures.
 
-### Explanatory Variables
-- Year or time
-- Geographic region or station location
+### Reproducing
 
-### Data Sources
-- NOAA Global Historical Climatology Network (GHCN)
-- NOAA National Centers for Environmental Information (NCEI)
-- PRISM climate datasets
-- NOAA weather station observations
-- Midwest regional climate datasets
+```bash
+cd 01_Code
+python 01_clean_data.py     # requires 02_RawData/4311294.csv
+python 02_analyze_data.py
+python 03_make_figures.py
+```
 
-### Types of Analysis
-- Time-series analysis
-- Linear regression
-- Statistical summaries of annual extremes
-- Geographic visualization of precipitation trends
-- Histograms or boxplots comparing precipitation distributions over time
+Only NumPy, pandas, and Matplotlib are required; all statistical tests are
+implemented in `stats_utils.py`. The processed CSVs are also committed, so
+steps 2–3 run without re-downloading the raw data.
 
-# Part 4
+## Generative AI
 
-### Data Sources in 02_RawData
-Landsat Collection 2 Level-2 scene metadata (Landsat 8/9) from the USGS EarthExplorer website: https://earthexplorer.usgs.gov/. The spatial coverage includes Landsat scenes overlapping Chicago and the broader Midwest region, and the temporal coverage spans summer 2023 (June–August). The main variables include acquisition date, satellite (Landsat 8 or 9), path/row, cloud cover percentage, and scene identifiers. The file format is CSV (.csv).
-
-Landsat Collection 2 Level-2 QA Pixel band (Landsat 8) from the U.S. Geological Survey EarthExplorer website: https://earthexplorer.usgs.gov/
-. The spatial coverage includes a Landsat scene overlapping Chicago and the surrounding Midwest region, and the temporal coverage corresponds to a single acquisition date on August 31, 2023. The main variables include pixel-level quality assessment values indicating cloud cover, cloud shadows, snow, water, and other surface conditions used for masking and preprocessing satellite imagery. The file format is GeoTIFF (.tif).
-
-American Community Survey (ACS) 5-Year demographic data from the United States Census Bureau website: https://data.census.gov/
-. The spatial coverage includes Chicago wards, and the temporal coverage corresponds to the most recent 5-year ACS estimates (e.g., 2018–2022). The main variables include median household income, total population, population density, and other demographic indicators aggregated at the ward level. The file format is CSV (.csv).
-
-Global Historical Climatology Network Daily (GHCN-Daily) precipitation data from the National Oceanic and Atmospheric Administration website: https://www.ncdc.noaa.gov/cdo-web/
-. This dataset represents a sample of the total Midwest weather station data, using a subset of selected stations to make the analysis manageable. The spatial coverage includes selected weather stations across Illinois and nearby Midwest locations, including Chicago-area airports (O’Hare, Midway, DuPage, Aurora, Palwaukee, Waukegan), Peoria, Rockford, and Springfield, as well as a small number of additional stations in Ohio, Missouri, and Vermont. The temporal coverage spans 1990–2024. The main variables include daily precipitation (PRCP), multiday precipitation totals (MDPR), and the number of days included in multiday precipitation events (DAPR), along with station name and geographic location metadata. The file format is CSV (.csv).
-
-# Part 5. Preliminary Method Plan
-
-## Research Question  
-Have extreme precipitation events increased in the Midwest over the past 30 years?
-
-## Data Cleaning  
-Data from the NOAA GHCN-Daily dataset will be cleaned by removing missing or invalid values. The dataset will be filtered to include selected stations across the Midwest and the time period 1990–2024.
-
-## Variables  
-- Response: daily precipitation (PRCP), annual maximum precipitation, number of extreme precipitation days  
-- Explanatory: year  
-- Grouping: weather station  
-
-## Visualizations  
-- Line graphs of annual maximum precipitation over time  
-- Line graphs of extreme precipitation days per year  
-- Histograms or boxplots comparing precipitation across years
-
-## Methods  
-- Linear regression to assess rain trends over time  
-- Threshold analysis to define extreme events (e.g., precipitation above 25 mm)  
-
-# Note on AI 
-AI was used to brainstorm the research questions and to generate potential data sources.
-
-Prompt 1: Generate 10 specific and testable research questions related to environmental science and climate data analysis.
-
-Prompt 2: Suggest 5 real, publicly available datasets for a data science project on (my topics). 
-
-The AI output helped me find the relevant data faster and develop research questions suited to the class and the Midwest. 
+Generative AI assisted with brainstorming, data-source discovery, code
+scaffolding, and editing; every meaningful use is documented in the
+**Generative AI Acknowledgment** section of `08_Final_Report/Final_Report.md`.
+All numbers were produced by the committed code and independently checked.
