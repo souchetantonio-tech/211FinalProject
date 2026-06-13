@@ -1,0 +1,5 @@
+metric,early_mean,late_mean,difference,t,df,p
+Days >= 1 in (25.4 mm) per year,7.729,8.771,1.043,1.936,135.5,0.055
+Days >= 2 in (50.8 mm) per year,1.429,1.414,-0.014,-0.071,137.1,0.9433
+Annual max 1-day precip / Rx1day (in),2.713,2.789,0.075,0.436,134.0,0.6637
+Annual total precip (in),35.93,38.404,2.474,2.014,137.4,0.046
